@@ -1,27 +1,26 @@
-handlebars-helper-icon
+handlebars-helper-svg
 ======================
 
-A helper to inline svg icons efficiently
+A helper to inline svg efficiently
 
 Use
 ----
 
-Register this module as a handlebars helper, and then you can load SVG icons
+Register this module as a handlebars helper, and then you can load SVG files
 from packages.
 
 In your template:
 
 ```
 <div class='thing'>
-    {{icon "somepackage/test.svg" width="109"}}
+    {{svg "somepackage/test.svg" width="109"}}
 </div>
 <div class='someotherplace'>
-    {{icon "somepackage/test.svg" width="22"}}
+    {{svg "somepackage/test.svg" width="22"}}
 </div>
 ```
 
-The SVG will be inlined as a symbol, and all further uses on a page will only
-have a small `<use>` element referring to the definition.
+The SVG will be inlined, and attributes will be added to the root element.
 
 This module only works for server-side rendering, though contributions to add
 browser support are welcome.
