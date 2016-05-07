@@ -4,6 +4,7 @@ const ltx = require('ltx');
 const resolve = require('resolve');
 
 const nameToModule = {};
+const cache = {};
 
 module.exports = function(name, opts) {
 
@@ -11,7 +12,7 @@ module.exports = function(name, opts) {
     extensions: ['.svg']
   }));
 
-  const content = require.cache[mod] || (require.cache[mod] = fs.readFileSync(mod, 'utf-8'));
+  const content = cache[name] || (cache[name] = fs.readFileSync(mod, 'utf-8'));
 
   const svg = parse(content);
 
@@ -19,6 +20,8 @@ module.exports = function(name, opts) {
 
   return new handlebars.SafeString(svg.root().toString());
 }
+
+module.exports.cache = cache;
 
 function parse(xml, mod) {
   const svg = ltx.parse(xml);
